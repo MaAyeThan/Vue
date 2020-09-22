@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Vue in-browser</title>
+
+	<script type="text/javascript" src="vue.min.js"></script>
+</head>
+<body>
+	<div id="app"> <!-- id app shi tae a pai htai mar di data tway ko kite ta lo u use loe ya tay loe say lite tar  -->
+	  <h1>{{message}}</h1>  <!-- {{}}output htok sor -->
+      
+      <img :src="img" alt=""> <!-- img sor data ka img -->
+      
+      <p v-if="error">Error!</p> <!-- condition sait chin yin ko por shin sor mar v-if nit sait -->
+      <p v-else>No Error!</p>
+
+      <ul>
+      	<li v-for="todo in someTodos">
+      		{{ todo.text }}
+      	</li> <!-- todo ka kite tay name htar -->
+      </ul>
+
+      <button v-on:click="reverseMessage">Reverse Message</button> <!-- reversemessage is run chin ray message -->
+
+      <form>
+      	<label>Name:</label>
+      	<input type="text" name="name" v-model="username">
+      	<p>{{username}}</p>
+      </form>
+
+	</div> <!-- div a pyrt mar message htok pya loe ma ya -->
+   
+    <script type="text/javascript">
+    	var app = new Vue({   //vue sa use yar so sor nant new vue
+			  el: '#app',  // id=app ray el ko htok sor //el is selector
+			  data: {   // kite tae var ko keep htar loe ya 
+			    message: 'Hello Vue!' ,
+			    img: '../photo/1.jpg' ,
+			    error: false,
+			    todos: [
+			      { text: 'Learn JavaScript',status: false },
+			      { text: 'Learn Vue',status: false },
+			      { text: 'Build something awesome',status: true }
+			    ],
+			    username:''
+			  },
+			  methods: {
+			    reverseMessage: function () {
+			      this.message = this.message.split('').reverse().join('')
+			    }
+			  },
+			  computed:{
+			  	someTodos(){
+			  		return this.todos.filter(row=> row.status==true)
+			  	}
+			  }
+			})
+    </script>
+</body>
+</html>
